@@ -1,0 +1,5 @@
+outs:
+- md5: cd9a173eb726f2b19bbd3c73bb553a5f
+  size: 457768
+  hash: md5
+  path: spy_processed.csv
