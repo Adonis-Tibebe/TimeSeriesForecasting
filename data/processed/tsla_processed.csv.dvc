@@ -1,0 +1,5 @@
+outs:
+- md5: c2d8460c9e979ba2863de8421d5566be
+  size: 458198
+  hash: md5
+  path: tsla_processed.csv

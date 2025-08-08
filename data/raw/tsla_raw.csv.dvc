@@ -1,0 +1,5 @@
+outs:
+- md5: e76b81c64289f1b384f20e26ab50a991
+  size: 283054
+  hash: md5
+  path: tsla_raw.csv

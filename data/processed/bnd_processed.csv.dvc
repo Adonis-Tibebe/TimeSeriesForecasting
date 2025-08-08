@@ -1,0 +1,5 @@
+outs:
+- md5: 36af67624ce5622cee76ca7fb321d69a
+  size: 453178
+  hash: md5
+  path: bnd_processed.csv
