@@ -1,0 +1,5 @@
+outs:
+- md5: ef8fcd3dd0cd39a261f2ace30c722430
+  size: 271043
+  hash: md5
+  path: bnd_raw.csv

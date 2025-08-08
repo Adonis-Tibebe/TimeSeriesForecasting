@@ -1,0 +1,5 @@
+outs:
+- md5: 4cb758ebad75052823d752d8decd884f
+  size: 278996
+  hash: md5
+  path: spy_raw.csv
