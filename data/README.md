@@ -1,3 +1,46 @@
 # Data
 
-Store your data files here.
+This directory contains all financial data used in the TimeSeriesForecasting project.
+
+## Directory Structure
+
+```
+data/
+├── raw/                    # Raw data from Yahoo Finance
+│   ├── tsla_raw.csv       # Tesla (TSLA) historical data
+│   ├── bnd_raw.csv        # Bond ETF (BND) historical data
+│   ├── spy_raw.csv        # S&P 500 ETF (SPY) historical data
+│   ├── metadata.json      # Data fetching metadata
+│   └── *.dvc              # DVC version control files
+├── processed/             # Cleaned and processed data
+│   ├── tsla_processed.csv # Processed Tesla data with derived metrics
+│   ├── bnd_processed.csv  # Processed BND data with derived metrics
+│   ├── spy_processed.csv  # Processed SPY data with derived metrics
+│   ├── risk_metrics.csv   # Risk analysis metrics
+│   └── *.dvc              # DVC version control files
+└── README.md              # This file
+```
+
+## Data Sources
+
+- **Raw Data**: Yahoo Finance via `yfinance` library
+- **Date Range**: 2015-07-01 to 2025-07-31
+- **Assets**: TSLA, BND, SPY
+- **Frequency**: Daily data
+
+## Data Processing
+
+Raw data is processed through the `data_processing.ipynb` notebook to:
+- Handle missing values (forward-fill prices, zero-fill volume)
+- Calculate derived metrics (daily returns, volatility, log returns)
+- Validate data quality and completeness
+
+## Version Control
+
+Data files are tracked using DVC (Data Version Control) for efficient storage and versioning of large files.
+
+## Usage
+
+- **Raw data**: Use for initial data exploration and validation
+- **Processed data**: Use for analysis, modeling, and forecasting
+- **Risk metrics**: Use for portfolio optimization and risk assessment
