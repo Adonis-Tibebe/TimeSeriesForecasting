@@ -28,21 +28,25 @@ At GMF Investments, financial analysts play a crucial role in interpreting compl
 
 ## Project Overview
 
-This project provides a complete pipeline for financial time series forecasting, from data acquisition to model development. It includes:
+This project provides a complete pipeline for financial time series forecasting, from data acquisition to model development and deployment. It includes:
 
 - **Data Acquisition**: Automated fetching of financial data from Yahoo Finance
 - **Data Processing**: Comprehensive cleaning, validation, and feature engineering
 - **Exploratory Analysis**: Deep dive into trends, volatility patterns, and risk metrics
-- **Modeling Framework**: Infrastructure for time series forecasting models
-- **Testing**: Unit and integration tests for data processing utilities
+- **Modeling Framework**: Advanced time series forecasting with ARIMA and LSTM models
+- **Model Evaluation**: Comprehensive performance metrics and model selection
+- **Model Persistence**: Trained models saved for production inference
+- **Testing**: Unit and integration tests for data processing and modeling utilities
 
 ## Key Features
 
 - **Multi-Asset Analysis**: Support for TSLA (Tesla), BND (Bond ETF), and SPY (S&P 500 ETF)
 - **Automated Data Pipeline**: End-to-end data processing from raw to analysis-ready
 - **Comprehensive EDA**: Advanced statistical analysis and risk assessment
+- **Advanced Modeling**: ARIMA and LSTM models for time series forecasting
+- **Model Comparison**: Performance evaluation and selection based on business requirements
 - **Modular Architecture**: Clean separation of concerns with reusable components
-- **Production Ready**: Testing, logging, and configuration management
+- **Production Ready**: Testing, logging, configuration management, and model persistence
 - **Industry-Focused**: Designed for real-world financial analysis and portfolio management
 
 ## Project Structure
@@ -61,16 +65,23 @@ TimeSeriesForecasting/
 ├── examples/              # Usage examples
 │   ├── __init__.py
 │   └── README.md
+├── models/                # Trained and saved models
+│   ├── arima_model.pkl   # Trained ARIMA model
+│   ├── lstm_model.h5     # Trained LSTM model
+│   └── lstm_scalers.pkl  # LSTM preprocessing scalers
 ├── notebooks/             # Jupyter notebooks
 │   ├── data_processing.ipynb  # Data cleaning and feature engineering
 │   ├── EDA.ipynb             # Exploratory data analysis
+│   ├── modeling.ipynb        # ARIMA and LSTM modeling
 │   └── README.md
 ├── scripts/               # Utility scripts
 │   ├── data_fetcher.py   # Yahoo Finance data downloader
 │   └── README.md
 ├── src/                   # Source code
 │   ├── core/             # Core functionality
-│   ├── models/           # Forecasting models
+│   ├── models/           # Forecasting models and utilities
+│   │   ├── Models_utils.py  # Model utility functions
+│   │   └── __init__.py
 │   ├── services/         # Business logic services
 │   ├── utils/            # Utility functions
 │   │   ├── data_processing_utils.py
@@ -79,7 +90,8 @@ TimeSeriesForecasting/
 ├── tests/                # Test suite
 │   ├── integration/      # Integration tests
 │   ├── unit/            # Unit tests
-│   │   └── test_data_processing_utils.py
+│   │   ├── test_data_processing_utils.py
+│   │   └── test_models_utils.py
 │   └── __init__.py
 ├── .gitignore           # Git ignore rules
 ├── Makefile             # Build and development commands
@@ -94,6 +106,7 @@ TimeSeriesForecasting/
 
 - Python 3.8 or higher
 - pip or conda package manager
+- GPU support recommended for LSTM training (optional)
 
 ### Installation
 
@@ -129,6 +142,7 @@ TimeSeriesForecasting/
    ```
    - Run `data_processing.ipynb` to clean and prepare data
    - Run `EDA.ipynb` for comprehensive analysis
+   - Run `modeling.ipynb` for ARIMA and LSTM modeling
 
 ## Data Pipeline
 
@@ -165,6 +179,14 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **Correlation Analysis**: Portfolio diversification insights
 - **Outlier Detection**: Statistical analysis of extreme returns
 
+### 4. Modeling (`notebooks/modeling.ipynb`)
+
+- **ARIMA Modeling**: Automatic parameter selection with `pmdarima.auto_arima`
+- **LSTM Neural Network**: Deep learning model with volatility features
+- **Model Comparison**: Performance evaluation using MAE, RMSE, and MAPE
+- **Model Selection**: Business-driven model choice based on requirements
+- **Model Persistence**: Trained models saved for production use
+
 ## 🔍 Key Insights
 
 ### Risk-Return Profiles
@@ -176,18 +198,33 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 | **VaR (95%)**    | −5.33%   | −1.69%   | −0.48%   |
 | **Volatility**   | 58.10%   | 17.91%   | 5.39%    |
 
-### Portfolio Construction(speculation to be adjusted after modeling)
+### Model Performance Comparison
+
+| Metric | ARIMA | LSTM |
+|--------|-------|------|
+| **MAE** | 0.029097 | 0.028221 |
+| **RMSE** | 0.041115 | 0.039595 |
+| **MAPE** | 107.39% | 514.12% |
+
+**Key Findings:**
+- **LSTM outperforms ARIMA** on MAE and RMSE metrics
+- **ARIMA shows better MAPE** due to handling of zero returns
+- **LSTM captures volatility patterns** better than linear ARIMA
+
+### Portfolio Construction
 
 - **60% SPY / 30% TSLA / 10% BND** blend captures growth while mitigating losses
 - **BND allocation** of 20% reduces portfolio VaR by ~18-20%
 - **Diversification benefits** from low correlation between assets
+- **LSTM model** selected for future tasks due to superior volatility capture
 
 ## Development
 
 ### Project Structure
 
 - **`src/utils/`**: Core data processing utilities
-- **`src/models/`**: Time series forecasting models (future)
+- **`src/models/`**: Time series forecasting models and utilities
+  - `Models_utils.py`: Sequence creation and metrics calculation functions
 - **`src/services/`**: Business logic services (future)
 - **`src/core/`**: Core functionality (future)
 
@@ -199,6 +236,9 @@ python -m pytest tests/unit/
 
 # Run integration tests
 python -m pytest tests/integration/
+
+# Run specific test file
+python -m pytest tests/unit/test_models_utils.py
 ```
 
 ### Code Quality
@@ -210,17 +250,13 @@ python -m pytest tests/integration/
 
 ## Documentation
 
-- **`notebooks/README.md`**: Detailed notebook documentation
+- **`notebooks/README.md`**: Detailed notebook documentation including modeling
 - **`scripts/README.md`**: Script usage and examples
 - **`docs/`**: Project documentation (future)
 - **`examples/`**: Usage examples (future)
 
-##  Configuration
+## Configuration
 
-### Environment Variables
-
-- `DATA_RAW_DIR`: Raw data directory (default: `data/raw/`)
-- `DATA_PROCESSED_DIR`: Processed data directory (default: `data/processed/`)
 
 ### Settings
 
@@ -235,6 +271,36 @@ DEFAULT_END_DATE = "2025-07-31"
 # Analysis settings
 VOLATILITY_WINDOW = 21
 CORRELATION_THRESHOLD = 0.3
+
+# Modeling settings
+LSTM_WINDOW_SIZE = 20
+ARIMA_SEASONAL = False
+```
+
+## Model Deployment
+
+### Saved Models
+
+The project includes pre-trained models in the `models/` directory:
+
+- **`arima_model.pkl`**: Trained ARIMA(2,0,2) model for TSLA returns
+- **`lstm_model.h5`**: Trained LSTM model with volatility features
+- **`lstm_scalers.pkl`**: Preprocessing scalers and parameters
+
+### Model Usage
+
+```python
+import joblib
+from tensorflow import keras
+
+# Load ARIMA model
+arima_model = joblib.load('models/arima_model.pkl')
+
+# Load LSTM model
+lstm_model = keras.models.load_model('models/lstm_model.h5')
+
+# Load scalers
+scalers = joblib.load('models/lstm_scalers.pkl')
 ```
 
 ## Contributing
@@ -251,10 +317,12 @@ CORRELATION_THRESHOLD = 0.3
 - Add type hints to all functions
 - Write tests for new functionality
 - Update documentation for API changes
+- Ensure model performance meets business requirements
 
 ## License
 
 None
+
 ## Acknowledgments
 
 - **Yahoo Finance**: Data source via `yfinance` library
@@ -262,6 +330,9 @@ None
 - **NumPy**: Numerical computing
 - **Matplotlib/Seaborn**: Data visualization
 - **Statsmodels**: Statistical analysis
+- **TensorFlow/Keras**: Deep learning framework
+- **PMDARIMA**: Automatic ARIMA parameter selection
+- **Scikit-learn**: Machine learning utilities
 
 ---
 
