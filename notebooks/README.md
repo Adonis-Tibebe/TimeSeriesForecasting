@@ -130,12 +130,124 @@ Comprehensive exploratory data analysis of the processed financial data to ident
 
 ---
 
+## modeling.ipynb
+
+### Purpose
+Comprehensive time series forecasting analysis comparing ARIMA and LSTM models for Tesla stock returns prediction, with model evaluation, selection, and deployment.
+
+### Key Objectives
+1. **Implement ARIMA modeling** with automatic parameter selection
+2. **Build LSTM neural network** with volatility features
+3. **Compare model performance** using multiple metrics
+4. **Select optimal model** based on business requirements
+5. **Save trained models** for production inference
+
+### Modeling Approach
+
+#### 1. ARIMA (AutoRegressive Integrated Moving Average)
+**Implementation:**
+- Uses `pmdarima.auto_arima` for automatic parameter selection
+- Best model: ARIMA(2,0,2) with intercept
+- Trains on 2015-2023 data, tests on 2024 data
+
+**Key Features:**
+- Linear statistical model with interpretable coefficients
+- Fast inference and training
+- Handles basic trends and seasonality
+
+**Limitations Identified:**
+- Cannot capture non-linear patterns
+- Assumes constant variance (no volatility clustering)
+- Struggles with extreme market movements
+
+#### 2. LSTM (Long Short-Term Memory)
+**Architecture:**
+```python
+Sequential([
+    LSTM(200, return_sequences=True, recurrent_dropout=0.1),
+    Dropout(0.2),
+    LSTM(100),
+    Dense(1)
+])
+```
+
+**Key Features:**
+- 20-day lookback window for sequence creation
+- Incorporates volatility features (21D rolling volatility)
+- Uses MinMaxScaler for feature normalization
+- Early stopping to prevent overfitting
+
+**Training Configuration:**
+- **Optimizer**: Adam with learning rate 0.0005
+- **Loss**: Mean Squared Error (MSE)
+- **Batch Size**: 128
+- **Epochs**: 60 with early stopping (patience=5)
+
+### Model Performance Comparison
+
+| Metric | ARIMA | LSTM |
+|--------|-------|------|
+| **MAE** | 0.029097 | 0.028221 |
+| **RMSE** | 0.041115 | 0.039595 |
+| **MAPE** | 107.39% | 514.12% |
+
+**Key Findings:**
+- **LSTM outperforms ARIMA** on MAE and RMSE metrics
+- **ARIMA shows better MAPE** due to handling of zero returns
+- **LSTM captures volatility patterns** better than linear ARIMA
+
+### Model Selection Rationale
+
+#### Why LSTM Was Chosen
+1. **Volatility Sensitivity**: Better captures TSLA's non-linear risk dynamics
+2. **Feature Extensibility**: Easy to add macro indicators and cross-asset correlations
+3. **Business Alignment**: Fits GMF's focus on cutting-edge technology
+4. **Automated Retraining**: Supports operational workflows
+
+#### Tradeoffs Accepted
+- ~5% higher computational cost
+- Requires periodic volatility rescaling
+- Less responsive to extreme outliers but better volatility reaction
+
+### Data Preparation
+- **Features**: Log returns + 21D volatility
+- **Sequence Creation**: 20-day lookback window
+- **Train/Test Split**: 80/20 chronological split
+- **Scaling**: MinMaxScaler applied to each feature separately
+
+### Model Persistence
+**Saved Models:**
+- `arima_model.pkl`: Trained ARIMA model
+- `lstm_model.h5`: Trained LSTM model (Keras format)
+- `lstm_scalers.pkl`: Preprocessing scalers and parameters
+
+**Storage Location:** `../models/` directory
+
+### Key Insights
+
+#### Model Strengths
+1. **ARIMA**: Excellent baseline for stable market periods
+2. **LSTM**: Superior for volatile, non-linear market conditions
+
+#### Business Applications
+1. **Portfolio Management**: Use LSTM for dynamic allocation strategies
+2. **Risk Management**: Leverage volatility features for position sizing
+3. **Trading Signals**: Combine both models for robust decision making
+
+### Next Steps
+1. **Feature Engineering**: Add macro indicators (VIX, interest rates)
+2. **Ensemble Methods**: Combine ARIMA and LSTM predictions
+3. **Real-time Deployment**: Implement model serving infrastructure
+4. **Performance Monitoring**: Track model drift and retraining needs
+
+---
+
 ## Usage Instructions
 
 ### Prerequisites
 1. Ensure raw data is available in `data/raw/` directory
 2. Install required dependencies: `pandas`, `numpy`, `matplotlib`, `seaborn`, `statsmodels`
-3. Run notebooks in order: `data_processing.ipynb` → `EDA.ipynb`
+3. Run notebooks in order: `data_processing.ipynb` → `EDA.ipynb` → `modeling.ipynb`
 
 ### Running the Notebooks
 ```bash
@@ -148,21 +260,24 @@ jupyter lab
 # Run notebooks in sequence
 # 1. data_processing.ipynb
 # 2. EDA.ipynb
+# 3. modeling.ipynb
 ```
 
 ### Dependencies
 - **Core**: `pandas`, `numpy`, `matplotlib`
 - **Visualization**: `seaborn`
 - **Statistics**: `statsmodels`
-- **Utilities**: `pathlib`
+- **Machine Learning**: `tensorflow`, `keras`, `pmdarima`, `sklearn`
+- **Utilities**: `pathlib`, `joblib`
 
 ### Data Flow
 ```
-data/raw/ → data_processing.ipynb → data/processed/ → EDA.ipynb → insights/
+data/raw/ → data_processing.ipynb → data/processed/ → EDA.ipynb → insights/ → modeling.ipynb → models/
 ```
 
 ### Notes
-- Both notebooks are designed to be run sequentially
+- All three notebooks are designed to be run sequentially
 - Data processing notebook must be run first to generate processed data
 - EDA notebook provides comprehensive analysis for modeling decisions
-- All visualizations and metrics are saved for future reference
+- Modeling notebook requires significant computational resources for LSTM training
+- All visualizations, metrics, and trained models are saved for future reference
