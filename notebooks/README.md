@@ -265,6 +265,29 @@ Generates 6-month price forecasts using the trained LSTM model and provides tren
 
 ---
 
+## portfolio_optimization.ipynb
+
+### Purpose
+Implements Modern Portfolio Theory (MPT) optimization using forecasted TSLA data and historical BND/SPY data to construct optimal portfolios.
+
+### Key Features
+- **Portfolio Optimization**: Generates efficient frontier using expected returns and covariance matrix
+- **Risk-Return Analysis**: Identifies maximum Sharpe ratio and minimum volatility portfolios
+- **Asset Allocation**: Recommends optimal weights for TSLA, BND, and SPY
+- **Performance Metrics**: Calculates expected return, volatility, and Sharpe ratio
+
+### Output
+- **Optimal Weights**: Maximum Sharpe ratio portfolio (TSLA: 5.8%, BND: 55.4%, SPY: 38.8%)
+- **Performance**: Expected 8.0% return with 9.9% volatility (Sharpe: 0.81)
+- **Backtesting Data**: Saves optimal weights and asset prices to `data/backtesting/`
+
+### Dependencies
+- TSLA forecast data from `data/forecasts/tsla_6m_forecast.csv`
+- Historical data for BND and SPY from `data/processed/`
+- Portfolio optimization using Modern Portfolio Theory principles
+
+---
+
 ## Usage Instructions
 
 ### Prerequisites
