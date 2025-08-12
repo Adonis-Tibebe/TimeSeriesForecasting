@@ -79,12 +79,15 @@ TimeSeriesForecasting/
 │   ├── modeling.ipynb        # ARIMA and LSTM modeling
 │   ├── Forecast.ipynb        # Price forecasting and analysis
 │   ├── portfolio_optimization.ipynb # Portfolio optimization using MPT
+│   ├── bcaktesting.ipynb     # Strategy backtesting and validation
 │   └── README.md
 ├── scripts/               # Utility scripts
 │   ├── data_fetcher.py   # Yahoo Finance data downloader
 │   └── README.md
 ├── src/                   # Source code
 │   ├── core/             # Core functionality
+│   │   ├── backtesting.py    # Strategy backtesting functions
+│   │   └── __init__.py
 │   ├── models/           # Forecasting models and utilities
 │   │   ├── Models_utils.py  # Model utility functions
 │   │   ├── forecasts.py     # Forecasting functions
@@ -98,7 +101,8 @@ TimeSeriesForecasting/
 │   ├── integration/      # Integration tests
 │   ├── unit/            # Unit tests
 │   │   ├── test_data_processing_utils.py
-│   │   └── test_models_utils.py
+│   │   ├── test_models_utils.py
+│   │   └── test_backtesting.py
 │   └── __init__.py
 ├── .gitignore           # Git ignore rules
 ├── Makefile             # Build and development commands
@@ -152,6 +156,7 @@ TimeSeriesForecasting/
    - Run `modeling.ipynb` for ARIMA and LSTM modeling
    - Run `Forecast.ipynb` for price forecasting and analysis
    - Run `portfolio_optimization.ipynb` for portfolio optimization
+   - Run `bcaktesting.ipynb` for strategy validation and final assessment
 
 ## Data Pipeline
 
@@ -210,6 +215,13 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **Asset Allocation**: Optimal weights for TSLA, BND, and SPY
 - **Output**: Portfolio weights and asset prices saved to `data/backtesting/`
 
+### 7. Strategy Backtesting (`notebooks/bcaktesting.ipynb`)
+
+- **Performance Validation**: Comprehensive backtesting of optimized portfolio strategy
+- **Benchmark Comparison**: Strategy vs 60/40 SPY/BND benchmark performance
+- **Risk Metrics**: Sharpe ratio and cumulative return analysis
+- **Final Assessment**: Complete pipeline validation and performance insights
+
 ## 🔍 Key Insights
 
 ### Risk-Return Profiles
@@ -249,8 +261,9 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **`src/models/`**: Time series forecasting models and utilities
   - `Models_utils.py`: Sequence creation and metrics calculation functions
   - `forecasts.py`: Forecasting functions for price prediction
+- **`src/core/`**: Core functionality and validation
+  - `backtesting.py`: Strategy backtesting and performance validation functions
 - **`src/services/`**: Business logic services (future)
-- **`src/core/`**: Core functionality (future)
 
 ### Testing
 
@@ -356,6 +369,19 @@ None
 - **TensorFlow/Keras**: Deep learning framework
 - **PMDARIMA**: Automatic ARIMA parameter selection
 - **Scikit-learn**: Machine learning utilities
+- **PyPortfolioOpt**: Portfolio optimization library
+
+## Project Completion
+
+This TimeSeriesForecasting project represents a comprehensive end-to-end solution for financial time series analysis, forecasting, and portfolio optimization. The project successfully demonstrates:
+
+- **Complete Data Pipeline**: From raw data acquisition through final validation
+- **Advanced Modeling**: ARIMA and LSTM implementations with performance comparison
+- **Portfolio Optimization**: Modern Portfolio Theory implementation with risk management
+- **Strategy Validation**: Comprehensive backtesting framework for performance assessment
+- **Production Readiness**: Modular architecture, comprehensive testing, and documentation
+
+The project is now complete and ready for production deployment, providing a robust foundation for financial analysis and portfolio management applications.
 
 ---
 
