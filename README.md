@@ -45,6 +45,7 @@ This project provides a complete pipeline for financial time series forecasting,
 - **Comprehensive EDA**: Advanced statistical analysis and risk assessment
 - **Advanced Modeling**: ARIMA and LSTM models for time series forecasting
 - **Model Comparison**: Performance evaluation and selection based on business requirements
+- **Portfolio Optimization**: Modern Portfolio Theory implementation for optimal asset allocation
 - **Modular Architecture**: Clean separation of concerns with reusable components
 - **Production Ready**: Testing, logging, configuration management, and model persistence
 - **Industry-Focused**: Designed for real-world financial analysis and portfolio management
@@ -61,6 +62,7 @@ TimeSeriesForecasting/
 │   ├── raw/               # Raw data from Yahoo Finance
 │   ├── processed/         # Cleaned and processed data
 │   ├── forecasts/         # Model-generated forecasts
+│   ├── backtesting/       # Portfolio optimization outputs
 │   └── README.md
 ├── docs/                  # Project documentation
 │   └── README.md
@@ -76,6 +78,7 @@ TimeSeriesForecasting/
 │   ├── EDA.ipynb             # Exploratory data analysis
 │   ├── modeling.ipynb        # ARIMA and LSTM modeling
 │   ├── Forecast.ipynb        # Price forecasting and analysis
+│   ├── portfolio_optimization.ipynb # Portfolio optimization using MPT
 │   └── README.md
 ├── scripts/               # Utility scripts
 │   ├── data_fetcher.py   # Yahoo Finance data downloader
@@ -148,6 +151,7 @@ TimeSeriesForecasting/
    - Run `EDA.ipynb` for comprehensive analysis
    - Run `modeling.ipynb` for ARIMA and LSTM modeling
    - Run `Forecast.ipynb` for price forecasting and analysis
+   - Run `portfolio_optimization.ipynb` for portfolio optimization
 
 ## Data Pipeline
 
@@ -198,6 +202,13 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **Risk Analysis**: Confidence intervals and volatility bands
 - **Trend Assessment**: 6M/3M slope calculations and regime detection
 - **Output**: Forecasts saved to `data/forecasts/` for portfolio optimization
+
+### 6. Portfolio Optimization (`notebooks/portfolio_optimization.ipynb`)
+
+- **Modern Portfolio Theory**: Efficient frontier generation using expected returns and covariance
+- **Risk-Return Optimization**: Maximum Sharpe ratio and minimum volatility portfolios
+- **Asset Allocation**: Optimal weights for TSLA, BND, and SPY
+- **Output**: Portfolio weights and asset prices saved to `data/backtesting/`
 
 ## 🔍 Key Insights
 
