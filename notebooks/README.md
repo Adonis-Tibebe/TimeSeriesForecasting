@@ -242,6 +242,29 @@ Sequential([
 
 ---
 
+## Forecast.ipynb
+
+### Purpose
+Generates 6-month price forecasts using the trained LSTM model and provides trend analysis for portfolio optimization.
+
+### Key Features
+- **6-Month Forecasting**: Uses pre-trained LSTM model to predict TSLA prices
+- **Monte Carlo Simulation**: Generates confidence intervals and risk bands
+- **Trend Analysis**: Calculates 6M/3M slopes and volatility ratios
+- **Risk Assessment**: Identifies high-volatility periods and risk zones
+
+### Output
+- **Forecast Data**: 180-day price predictions saved to `data/forecasts/tsla_6m_forecast.csv`
+- **Visualizations**: Price forecasts with confidence bands and risk zones
+- **Analysis**: Trend strength and volatility comparison metrics
+
+### Dependencies
+- Trained LSTM model from `models/lstm_model.h5`
+- Preprocessing scalers from `models/lstm_scalers.pkl`
+- Functions from `src.models.forecasts` module
+
+---
+
 ## Usage Instructions
 
 ### Prerequisites
