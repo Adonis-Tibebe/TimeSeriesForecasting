@@ -48,6 +48,7 @@ This project provides a complete pipeline for financial time series forecasting,
 - **Modular Architecture**: Clean separation of concerns with reusable components
 - **Production Ready**: Testing, logging, configuration management, and model persistence
 - **Industry-Focused**: Designed for real-world financial analysis and portfolio management
+- **Forecasting**: Ability to generate and analyze model-generated forecasts
 
 ## Project Structure
 
@@ -59,6 +60,7 @@ TimeSeriesForecasting/
 ├── data/                   # Data storage
 │   ├── raw/               # Raw data from Yahoo Finance
 │   ├── processed/         # Cleaned and processed data
+│   ├── forecasts/         # Model-generated forecasts
 │   └── README.md
 ├── docs/                  # Project documentation
 │   └── README.md
@@ -73,6 +75,7 @@ TimeSeriesForecasting/
 │   ├── data_processing.ipynb  # Data cleaning and feature engineering
 │   ├── EDA.ipynb             # Exploratory data analysis
 │   ├── modeling.ipynb        # ARIMA and LSTM modeling
+│   ├── Forecast.ipynb        # Price forecasting and analysis
 │   └── README.md
 ├── scripts/               # Utility scripts
 │   ├── data_fetcher.py   # Yahoo Finance data downloader
@@ -81,6 +84,7 @@ TimeSeriesForecasting/
 │   ├── core/             # Core functionality
 │   ├── models/           # Forecasting models and utilities
 │   │   ├── Models_utils.py  # Model utility functions
+│   │   ├── forecasts.py     # Forecasting functions
 │   │   └── __init__.py
 │   ├── services/         # Business logic services
 │   ├── utils/            # Utility functions
@@ -143,6 +147,7 @@ TimeSeriesForecasting/
    - Run `data_processing.ipynb` to clean and prepare data
    - Run `EDA.ipynb` for comprehensive analysis
    - Run `modeling.ipynb` for ARIMA and LSTM modeling
+   - Run `Forecast.ipynb` for price forecasting and analysis
 
 ## Data Pipeline
 
@@ -187,6 +192,13 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **Model Selection**: Business-driven model choice based on requirements
 - **Model Persistence**: Trained models saved for production use
 
+### 5. Forecasting (`notebooks/Forecast.ipynb`)
+
+- **Price Forecasting**: 6-month TSLA price predictions using trained LSTM model
+- **Risk Analysis**: Confidence intervals and volatility bands
+- **Trend Assessment**: 6M/3M slope calculations and regime detection
+- **Output**: Forecasts saved to `data/forecasts/` for portfolio optimization
+
 ## 🔍 Key Insights
 
 ### Risk-Return Profiles
@@ -225,6 +237,7 @@ python data_fetcher.py --tickers AAPL MSFT GOOGL --start 2020-01-01 --end 2024-1
 - **`src/utils/`**: Core data processing utilities
 - **`src/models/`**: Time series forecasting models and utilities
   - `Models_utils.py`: Sequence creation and metrics calculation functions
+  - `forecasts.py`: Forecasting functions for price prediction
 - **`src/services/`**: Business logic services (future)
 - **`src/core/`**: Core functionality (future)
 
@@ -250,13 +263,12 @@ python -m pytest tests/unit/test_models_utils.py
 
 ## Documentation
 
-- **`notebooks/README.md`**: Detailed notebook documentation including modeling
+- **`notebooks/README.md`**: Detailed notebook documentation including modeling and forecasting
 - **`scripts/README.md`**: Script usage and examples
 - **`docs/`**: Project documentation (future)
 - **`examples/`**: Usage examples (future)
 
 ## Configuration
-
 
 ### Settings
 
