@@ -1,0 +1,5 @@
+outs:
+- md5: 33714503f60976ff5579ff9f2826e684
+  size: 17643
+  hash: md5
+  path: tsla_6m_forecast.csv
