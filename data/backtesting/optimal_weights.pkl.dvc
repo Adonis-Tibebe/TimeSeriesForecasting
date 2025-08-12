@@ -1,0 +1,5 @@
+outs:
+- md5: 0607bcb25b3f4c5eb9c21856ea281a53
+  size: 93
+  hash: md5
+  path: optimal_weights.pkl

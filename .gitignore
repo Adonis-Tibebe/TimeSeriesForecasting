@@ -155,6 +155,7 @@ cython_debug/
 data/raw/*
 data/processed/*
 data/forecasts/*
+data/backtesting/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
