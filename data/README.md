@@ -20,6 +20,9 @@ data/
 │   └── *.dvc              # DVC version control files
 ├── forecasts/             # Model-generated forecasts
 │   └── tsla_6m_forecast.csv # 6-month TSLA price forecasts
+├── backtesting/           # Portfolio optimization outputs
+│   ├── optimal_weights.pkl # Optimal portfolio weights
+│   └── asset_prices.csv   # Historical asset prices for backtesting
 └── README.md              # This file
 ```
 
@@ -44,6 +47,13 @@ The `Forecast.ipynb` notebook generates:
 - **Risk bands** and confidence intervals
 - **Trend analysis** for portfolio optimization
 
+## Backtesting
+
+The `portfolio_optimization.ipynb` notebook creates:
+- **Optimal portfolio weights** based on Modern Portfolio Theory
+- **Asset price data** for historical backtesting analysis
+- **Portfolio performance metrics** for risk-return optimization
+
 ## Version Control
 
 Data files are tracked using DVC (Data Version Control) for efficient storage and versioning of large files.
@@ -54,3 +64,4 @@ Data files are tracked using DVC (Data Version Control) for efficient storage an
 - **Processed data**: Use for analysis, modeling, and forecasting
 - **Risk metrics**: Use for portfolio optimization and risk assessment
 - **Forecasts**: Use for strategic planning and risk management
+- **Backtesting**: Use for portfolio performance validation and optimization
