@@ -1,0 +1,5 @@
+outs:
+- md5: 98e34ddd878ba192c102642fb7caaa0b
+  size: 173555
+  hash: md5
+  path: asset_prices.csv
