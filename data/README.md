@@ -18,6 +18,8 @@ data/
 │   ├── spy_processed.csv  # Processed SPY data with derived metrics
 │   ├── risk_metrics.csv   # Risk analysis metrics
 │   └── *.dvc              # DVC version control files
+├── forecasts/             # Model-generated forecasts
+│   └── tsla_6m_forecast.csv # 6-month TSLA price forecasts
 └── README.md              # This file
 ```
 
@@ -35,6 +37,13 @@ Raw data is processed through the `data_processing.ipynb` notebook to:
 - Calculate derived metrics (daily returns, volatility, log returns)
 - Validate data quality and completeness
 
+## Forecasting
+
+The `Forecast.ipynb` notebook generates:
+- **6-month price forecasts** using trained LSTM model
+- **Risk bands** and confidence intervals
+- **Trend analysis** for portfolio optimization
+
 ## Version Control
 
 Data files are tracked using DVC (Data Version Control) for efficient storage and versioning of large files.
@@ -44,3 +53,4 @@ Data files are tracked using DVC (Data Version Control) for efficient storage an
 - **Raw data**: Use for initial data exploration and validation
 - **Processed data**: Use for analysis, modeling, and forecasting
 - **Risk metrics**: Use for portfolio optimization and risk assessment
+- **Forecasts**: Use for strategic planning and risk management
